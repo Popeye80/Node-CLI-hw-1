@@ -54,24 +54,9 @@ async function addContact(name, email, phone) {
   }
 }
 
-const updateContact = async (contactId, name, email, phone) => {
-  try {
-    const contacts = await fs.readFile(contactsPath);
-    const parsedContacts = JSON.parse(contacts);
-    const filteredContacts = parsedContacts.filter(
-      (contact) => contact.id !== contactId
-    );
-    const updatedContact = { id: contactId, name, email, phone };
-    const newContactsList = [...filteredContacts, updatedContact];
-    fs.writeFile(contactsPath, JSON.stringify(newContactsList));
-    return updatedContact;
-  } catch (error) {}
-};
-
 module.exports = {
   listContacts,
   getContactById,
   removeContact,
   addContact,
-  updateContact,
 };
